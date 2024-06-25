@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Login Notification</title>
+  </head>
+  <body>
+    <img
+      src="https://127.0.0.1:8000/notifications/tracking/open/{{ token }}"
+      width="1"
+      height="1"
+    />
+    <div style="font-family: Arial, sans-serif; text-align: center">
+      <h2>Notamos um novo login, {{ username }}</h2>
+      <p>Notamos um login de um dispositivo que você não costuma usar.</p>
+      <table align="center" style="margin: 0 auto">
+        <tr>
+          <td style="text-align: center">
+            <img
+              src="https://static.xx.fbcdn.net/rsrc.php/v3/yP/r/qw9B7nfYRiQ.png"
+              alt="Device Icon"
+              width="50"
+              height="50"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center">
+            <p>{{ platform }} · {{ location }}</p>
+            <p>{{ time }}</p>
+          </td>
+        </tr>
+      </table>
+      <p>Se não foi você, entre em contato conosco em support@vicit.studio</p>
+    </div>
+  </body>
+</html>
