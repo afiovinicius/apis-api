@@ -46,7 +46,7 @@ async def signin_email(
 
     user_agent = request.headers.get("user-agent")
     user_platform = request.headers.get("Sec-Ch-Ua-Platform")
-    platform = f"{user_agent.split(" ")[0]} · {user_platform}"
+    platform = f"{user_agent.split(' ')[0]} · {user_platform}"
     location = request.client.host
     time = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S (UTC)")
 
