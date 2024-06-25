@@ -1,7 +1,10 @@
 import redis.asyncio as redis
 from app.core.config import settings
 
-redis_client = redis.Redis.from_url(settings.REDIS_URL)
+REDIS_URL = settings.REDIS_URL
+
+redis_client = redis.Redis.from_url(REDIS_URL)
+print(f"REDIS_URL from environment: {settings.REDIS_URL, REDIS_URL} ")
 
 
 async def check_redis_connection():

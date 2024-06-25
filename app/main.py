@@ -39,6 +39,8 @@ origins = [
     "http://vicit.studio",
     "https://vicit.studio",
     "http://localhost:3000",
+    "http://localhost:0000",
+    "http://localhost:8080",
 ]
 
 app.add_middleware(

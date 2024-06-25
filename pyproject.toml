@@ -28,6 +28,7 @@ jinja2 = "^3.1.4"
 asyncio = "^3.4.3"
 distutils-extra-python = "^2.39.2"
 ignr = "^2.2"
+gunicorn = "^22.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
