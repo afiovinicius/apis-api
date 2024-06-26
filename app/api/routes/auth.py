@@ -50,11 +50,11 @@ async def signin_email(
     location = request.client.host
     time = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S (UTC)")
 
-    subject = "New login to Task Manager"
-    template_name = "mail.html"
+    subject = "Novo dispositivo autenticado"
+    template_name = "signin-mail.html"
     context = {
         "request": request,
-        "token": access_token,
+        "user_id": user.id,
         "username": user.name,
         "platform": platform,
         "location": location,

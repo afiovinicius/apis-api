@@ -3,8 +3,8 @@ from app.core.config import settings
 
 
 def supabase_connect():
-    url: str = settings.SUPABASE_URL
-    key: str = settings.SECRET_KEY
+    url: str = settings.DATABASE_URL
+    key: str = settings.DATABASE_KEY
     supabase: Client = create_client(url, key)
 
     return supabase

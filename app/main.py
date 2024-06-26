@@ -16,8 +16,8 @@ Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI(
-    title="Task Manager",
-    summary="Aplicação de gerenciamento de atividades com controle de acesso baseado em função (RBAC)",
+    title="Apis API",
+    summary="API REST da Apis. Um webapp de produtividade que permite controle colaborativo das suas atividades e colegas.",
     description="""
         RBAC:
             Roles & permissions.
@@ -27,17 +27,18 @@ app = FastAPI(
             Manager
             Member
         """,
-    version="0.1.0",
+    version="1.0.0",
     contact={
         "name": "Afio Vinícius",
         "url": "https://vicit.studio",
-        "email": "afio@vicit.studio",
+        "email": "afiovinicius@gmail.com",
     },
 )
 
 origins = [
-    "http://vicit.studio",
-    "https://vicit.studio",
+    "www.apis.vicit.studio",
+    "http://apis.vicit.studio",
+    "https://apis.vicit.studio",
     "http://localhost:3000",
     "http://localhost:0000",
     "http://localhost:8080",
@@ -70,5 +71,4 @@ async def root():
 
 
 if __name__ == "__main__":
-
     uvicorn.run(app, host="0.0.0.0", port=8080)

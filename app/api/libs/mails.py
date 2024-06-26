@@ -31,28 +31,6 @@ async def send_email(recipients: List[str], subject: str, body: str):
         await redis_client.set(f"email_status:{email}", "delivered")
 
 
-async def track_open(token: str):
-    try:
-        await redis_client.set(f"email_open:{token}", "opened")
-    except HTTPException as e:
-        raise e
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
-        )
-
-
-async def track_click(token: str):
-    try:
-        await redis_client.set(f"email_click:{token}", "clicked")
-    except HTTPException as e:
-        raise e
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
-        )
-
-
 def send_email_background(
     background_tasks: BackgroundTasks,
     recipients: List[str],
@@ -62,18 +40,39 @@ def send_email_background(
     background_tasks.add_task(send_email, recipients, subject, body)
 
 
+async def track_open(user_id: str):
+    try:
+        await redis_client.set(f"email_open:{user_id}", "opened")
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
+        )
+
+
+async def track_click(email: str):
+    try:
+        await redis_client.set(f"email_click:{email}", "clicked")
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
+        )
+
+
 async def send_email_with_attachment(
     recipients: List[str],
     subject: str,
     body: str,
-    subtype: MessageType,
     attachment_path: str,
 ):
     message = MessageSchema(
         recipients=recipients,
         subject=subject,
         body=body,
-        subtype=subtype,
+        subtype=MessageType.html,
         attachments=[attachment_path],
     )
     fm = FastMail(conf)

@@ -10,7 +10,7 @@ from app.core.config import Settings
 
 
 config = context.config
-config.set_main_option("sqlalchemy.url", Settings().DATABASE_URL)
+config.set_main_option("sqlalchemy.url", Settings().DATABASE_POOLER)
 
 
 if config.config_file_name is not None:
