@@ -2,11 +2,11 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    DATABASE_POOLER: str
+    DATABASE_URL: str
     DATABASE_HOST: str
     DATABASE_USER: str
     DATABASE_PASS: str
-    DATABASE_URL: str
+    DATABASE_LINK: str
     DATABASE_KEY: str
 
     ALGORITHM: str
