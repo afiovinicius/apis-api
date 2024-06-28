@@ -7,19 +7,18 @@ from fastapi import (
     status,
     BackgroundTasks,
 )
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.templating import Jinja2Templates
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
 from app.api.libs.mails import send_email_background
 from app.core.database import get_db
 from app.core.security import create_access_token, verify_password
+from app.core.config import settings
 from app.schemas import auth as auth_schema
 from app.crud import users as crud_users
 
 router = APIRouter(prefix="/auth", tags=["Autenticação"])
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/signin-with-email")
 
 template_directory = Path(__file__).resolve().parent.parent.parent / "templates"
 templates = Jinja2Templates(directory=str(template_directory))
@@ -39,9 +38,9 @@ async def signin_email(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=30)
     access_token = create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
+        data={"sub": user.email},
+        expires_delta=timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES),
     )
 
     user_agent = request.headers.get("user-agent")

@@ -19,13 +19,18 @@ app = FastAPI(
     title="Apis API",
     summary="API REST da Apis. Um webapp de produtividade que permite controle colaborativo das suas atividades e colegas.",
     description="""
-        RBAC:
-            Roles & permissions.
-
+        RBAC/ARBAC:
+            Roles & Permissions.
         Roles:
             Admin
+            Owner
             Manager
             Member
+        Permissions:
+            all_access
+            view
+            edit
+            comment
         """,
     version="1.0.0",
     contact={

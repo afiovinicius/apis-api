@@ -1,0 +1,9 @@
+*/temp*
+*/*/temp*
+temp?
+*.md
+README-secret.md
+!README*.md
+*/__pycache__*
+.env
+.env-*
