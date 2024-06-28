@@ -55,7 +55,7 @@ exclude = ['.venv', 'alembic']
 
 [tool.ruff.lint]
 preview = true
-ignore = ["E501"]
+ignore = ["E501", "I001"]
 select = ['I', 'F', 'E', 'W', 'PL', 'PT']
 
 [tool.ruff.format]

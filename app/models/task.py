@@ -25,7 +25,9 @@ class Task(Base):
 
     owner_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
     assigned_user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
-    owner = relationship("User", back_populates="owned_tasks", foreign_keys=[owner_id])
+    owner = relationship(
+        "User", back_populates="owned_tasks", foreign_keys=[owner_id]
+    )
     assigned_user = relationship(
         "User",
         back_populates="assigned_tasks",

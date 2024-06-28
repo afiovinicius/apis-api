@@ -5,9 +5,8 @@ ENV POETRY_VIRTUALENVS_CREATE=false
 WORKDIR /app
 COPY . .
 
-RUN pip install poetry
+RUN sudo pip install poetry
 RUN poetry config installer.max-workers 10
 RUN poetry install --no-interaction --no-ansi
 
-EXPOSE 8080
-CMD poetry run uvicorn --host 0.0.0.0 app.main:app
+CMD gunicorn -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8080
