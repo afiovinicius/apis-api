@@ -1,14 +1,14 @@
 from fastapi import APIRouter, HTTPException, status
 from app.api.libs.mails import track_open, track_click
 
-router = APIRouter(prefix="/notifications", tags=["Notificações/Mensageria"])
+router = APIRouter(prefix='/notifications', tags=['Notificações/Mensageria'])
 
 
-@router.get("/tracking/open/{user_id}")
+@router.get('/tracking/open/{user_id}')
 async def email_open_tracking(user_id: str):
     try:
         await track_open(user_id)
-        return {"message": f"Usuário {user_id} visualizou o email!"}
+        return {'message': f'Usuário {user_id} visualizou o email!'}
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -17,11 +17,11 @@ async def email_open_tracking(user_id: str):
         )
 
 
-@router.get("/tracking/click/{email}")
+@router.get('/tracking/click/{email}')
 async def email_click_tracking(email: str):
     try:
         await track_click(email)
-        return {"message": f"Clique no e-mail registrado para {email}"}
+        return {'message': f'Clique no e-mail registrado para {email}'}
     except HTTPException as e:
         raise e
     except Exception as e:

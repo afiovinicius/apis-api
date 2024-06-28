@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     REDIS_URL: str
 
     class Config:
-        env_file = ".env"
+        env_file = '.env'
 
 
 settings = Settings()

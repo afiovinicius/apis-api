@@ -6,11 +6,11 @@ from pydantic import BaseModel
 
 
 class TaskStatus(str, enum.Enum):
-    pending = "pending"
-    refining = "refining"
-    doing = "doing"
-    approving = "approving"
-    completed = "completed"
+    pending = 'pending'
+    refining = 'refining'
+    doing = 'doing'
+    approving = 'approving'
+    completed = 'completed'
 
 
 class TaskBase(BaseModel):

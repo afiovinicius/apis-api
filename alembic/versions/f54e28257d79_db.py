@@ -1,9 +1,8 @@
 """db
 
 Revision ID: f54e28257d79
-Revises: 
+Revises:
 Create Date: 2024-06-26 11:52:36.651718
-
 """
 from typing import Sequence, Union
 

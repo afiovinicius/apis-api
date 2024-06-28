@@ -10,7 +10,7 @@ conf = ConnectionConfig(
     MAIL_PASSWORD=settings.EMAIL_PASS,
     MAIL_FROM=settings.EMAIL_USER,
     MAIL_PORT=587,
-    MAIL_SERVER="smtp.gmail.com",
+    MAIL_SERVER='smtp.gmail.com',
     MAIL_FROM_NAME=settings.EMAIL_USER,
     MAIL_STARTTLS=True,
     MAIL_SSL_TLS=False,
@@ -28,7 +28,7 @@ async def send_email(recipients: List[str], subject: str, body: str):
     await fm.send_message(message)
 
     for email in recipients:
-        await redis_client.set(f"email_status:{email}", "delivered")
+        await redis_client.set(f'email_status:{email}', 'delivered')
 
 
 def send_email_background(
@@ -42,7 +42,7 @@ def send_email_background(
 
 async def track_open(user_id: str):
     try:
-        await redis_client.set(f"email_open:{user_id}", "opened")
+        await redis_client.set(f'email_open:{user_id}', 'opened')
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -53,7 +53,7 @@ async def track_open(user_id: str):
 
 async def track_click(email: str):
     try:
-        await redis_client.set(f"email_click:{email}", "clicked")
+        await redis_client.set(f'email_click:{email}', 'clicked')
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -79,4 +79,4 @@ async def send_email_with_attachment(
     await fm.send_message(message)
 
     for email in recipients:
-        redis_client.set(f"email_status:{email}", "delivered")
+        redis_client.set(f'email_status:{email}', 'delivered')

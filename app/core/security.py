@@ -4,7 +4,7 @@ from typing import Union
 from datetime import datetime, timedelta
 from app.core.config import settings
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
 
 def verify_password(plain_password: str, hashed_password: str):
@@ -15,7 +15,9 @@ def get_password_hash(password: str):
     return pwd_context.hash(password)
 
 
-def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):
+def create_access_token(
+    data: dict, expires_delta: Union[timedelta, None] = None
+):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
@@ -23,7 +25,7 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
         expire = datetime.utcnow() + timedelta(
             minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
         )
-    to_encode.update({"exp": expire})
+    to_encode.update({'exp': expire})
     encoded_jwt = jwt.encode(
         to_encode, settings.DATABASE_KEY, algorithm=settings.ALGORITHM
     )

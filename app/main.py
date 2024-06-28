@@ -16,8 +16,8 @@ Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI(
-    title="Apis API",
-    summary="API REST da Apis. Um webapp de produtividade que permite controle colaborativo das suas atividades e colegas.",
+    title='Apis API',
+    summary='API REST da Apis. Um webapp de produtividade que permite controle colaborativo das suas atividades e colegas.',
     description="""
         RBAC/ARBAC:
             Roles & Permissions.
@@ -32,33 +32,33 @@ app = FastAPI(
             edit
             comment
         """,
-    version="1.0.0",
+    version='1.0.0',
     contact={
-        "name": "Afio Vinícius",
-        "url": "https://vicit.studio",
-        "email": "afiovinicius@gmail.com",
+        'name': 'Afio Vinícius',
+        'url': 'https://vicit.studio',
+        'email': 'afiovinicius@gmail.com',
     },
 )
 
 origins = [
-    "www.apis.vicit.studio",
-    "http://apis.vicit.studio",
-    "https://apis.vicit.studio",
-    "http://localhost:3000",
-    "http://localhost:0000",
-    "http://localhost:8080",
+    'www.apis.vicit.studio',
+    'http://apis.vicit.studio',
+    'https://apis.vicit.studio',
+    'http://localhost:3000',
+    'http://localhost:0000',
+    'http://localhost:8080',
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=['*'],
+    allow_headers=['*'],
 )
 
 
-@app.on_event("startup")
+@app.on_event('startup')
 async def startup():
     await check_redis_connection()
 
@@ -70,10 +70,10 @@ app.include_router(router_user.router)
 app.include_router(router_task.router)
 
 
-@app.get("/", tags=["Padrão"])
+@app.get('/', tags=['Padrão'])
 async def root():
-    return {"message": "Hello World"}
+    return {'message': 'Hello World'}
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+if __name__ == '__main__':
+    uvicorn.run(app, host='0.0.0.0', port=8080)
