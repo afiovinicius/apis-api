@@ -4,12 +4,34 @@ on:
   push:
     branches:
       - main
+      - develop
   pull_request:
     branches:
       - main
+      - develop
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+
+      - name: Run tests
+        run: poetry run task test
+
   build:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -34,6 +56,11 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/apis_app:latest
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Deploy to Render
         run: |
           curl -X POST -H "Accept: application/json" -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" -H "Content-Type: application/json" \
