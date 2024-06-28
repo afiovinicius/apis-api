@@ -1,6 +1,8 @@
 import uuid
 from typing import List
+
 from sqlalchemy.orm import Session
+
 from app.models.task import Task
 from app.schemas.task import TaskCreate, TaskUpdate
 
@@ -18,10 +20,7 @@ def get_tasks_for_manager(
 ) -> List[Task]:
     return (
         db.query(Task)
-        .filter(
-            (Task.owner_id == manager_id)
-            | (Task.assigned_user_id == manager_id)
-        )
+        .filter((Task.owner_id == manager_id) | (Task.assigned_user_id == manager_id))
         .offset(skip)
         .limit(limit)
         .all()

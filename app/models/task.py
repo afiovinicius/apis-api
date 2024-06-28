@@ -1,34 +1,34 @@
-import uuid
 import datetime
 import enum
+import uuid
+
+from sqlalchemy import Column, DateTime, Enum, ForeignKey, String
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import Column, String, ForeignKey, DateTime, Enum
 from sqlalchemy.orm import relationship
+
 from app.core.database import Base
 
 
 class TaskStatus(str, enum.Enum):
-    pending = 'pending'
-    refining = 'refining'
-    doing = 'doing'
-    approving = 'approving'
-    completed = 'completed'
+    pending = "pending"
+    refining = "refining"
+    doing = "doing"
+    approving = "approving"
+    completed = "completed"
 
 
 class Task(Base):
-    __tablename__ = 'tasks'
+    __tablename__ = "tasks"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = Column(String, index=True)
 
-    owner_id = Column(UUID(as_uuid=True), ForeignKey('users.id'))
-    assigned_user_id = Column(UUID(as_uuid=True), ForeignKey('users.id'))
-    owner = relationship(
-        'User', back_populates='owned_tasks', foreign_keys=[owner_id]
-    )
+    owner_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
+    assigned_user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
+    owner = relationship("User", back_populates="owned_tasks", foreign_keys=[owner_id])
     assigned_user = relationship(
-        'User',
-        back_populates='assigned_tasks',
+        "User",
+        back_populates="assigned_tasks",
         foreign_keys=[assigned_user_id],
     )
 

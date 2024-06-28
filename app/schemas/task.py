@@ -1,16 +1,17 @@
-import uuid
 import enum
-from typing import Optional
+import uuid
 from datetime import datetime
+from typing import Optional
+
 from pydantic import BaseModel
 
 
 class TaskStatus(str, enum.Enum):
-    pending = 'pending'
-    refining = 'refining'
-    doing = 'doing'
-    approving = 'approving'
-    completed = 'completed'
+    pending = "pending"
+    refining = "refining"
+    doing = "doing"
+    approving = "approving"
+    completed = "completed"
 
 
 class TaskBase(BaseModel):

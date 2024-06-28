@@ -1,13 +1,15 @@
-import uuid
 import datetime
-from sqlalchemy import Boolean, Column, String, DateTime
+import uuid
+
+from sqlalchemy import Boolean, Column, DateTime, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
+
 from app.core.database import Base
 
 
 class User(Base):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     name = Column(String, index=True)
@@ -18,12 +20,12 @@ class User(Base):
     is_active = Column(Boolean, default=True)
 
     owned_tasks = relationship(
-        'Task', back_populates='owner', foreign_keys='[Task.owner_id]'
+        "Task", back_populates="owner", foreign_keys="[Task.owner_id]"
     )
     assigned_tasks = relationship(
-        'Task',
-        back_populates='assigned_user',
-        foreign_keys='[Task.assigned_user_id]',
+        "Task",
+        back_populates="assigned_user",
+        foreign_keys="[Task.assigned_user_id]",
     )
 
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
