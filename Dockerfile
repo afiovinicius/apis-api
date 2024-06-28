@@ -5,7 +5,7 @@ ENV POETRY_VIRTUALENVS_CREATE=false
 WORKDIR /app
 COPY . .
 
-RUN sudo pip install poetry
+RUN pip install poetry
 RUN poetry config installer.max-workers 10
 RUN poetry install --no-interaction --no-ansi
 
