@@ -32,7 +32,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: username/apis_app:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/apis_app:latest
 
       - name: Deploy to Render
         run: |
