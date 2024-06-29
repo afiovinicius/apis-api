@@ -46,7 +46,7 @@ isort = "^5.13.2"
 ignr = "^2.2"
 
 [tool.pytest.ini_options]
-pythonpath = "."
+pythonpath = "/tests"
 addopts = '-p no:warnings'
 
 [tool.ruff]
@@ -80,7 +80,7 @@ format = 'ruff check . --fix && ruff format . && isort .'
 dev = 'task format && uvicorn app.main:app --reload'
 start = 'gunicorn -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8080'
 pre_test = 'task lint'
-test = 'pytest -s -x --cov=app -vv'
+test = 'pytest -s -x --cov=tests -vv'
 post_test = 'coverage html'
 
 [build-system]
