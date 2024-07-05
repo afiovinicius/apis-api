@@ -1,5 +1,3 @@
-from http import HTTPStatus
-
 from fastapi.testclient import TestClient
 
 from app.api.libs.redis import check_redis_connection
@@ -7,12 +5,6 @@ from app.core.database import engine
 from app.main import app
 
 client = TestClient(app)
-
-
-def test_root():
-    response = client.get("/")
-    assert response.status_code == HTTPStatus.OK
-    assert response.json() == {"message": "Hello World"}
 
 
 def test_check_redis_connection():

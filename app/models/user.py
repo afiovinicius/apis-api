@@ -14,10 +14,21 @@ class User(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
+    hashed_password = Column(String, nullable=False)
+    is_provider_auth = Column(String, default="email", nullable=False)
 
     role = Column(String, index=True)
     is_active = Column(Boolean, default=True)
+    last_login = Column(
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow,
+    )
+    last_logout = Column(
+        DateTime,
+        default=datetime.datetime.utcnow,
+        onupdate=datetime.datetime.utcnow,
+    )
 
     owned_tasks = relationship(
         "Task", back_populates="owner", foreign_keys="[Task.owner_id]"

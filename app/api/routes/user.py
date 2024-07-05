@@ -15,7 +15,6 @@ router = APIRouter(prefix="/users", tags=["Usuários"])
 @router.post(
     "/add",
     response_model=user_schema.User,
-    dependencies=[Depends(get_current_admin_user)],
 )
 def add_user(user: user_schema.UserCreate, db: Session = Depends(get_db)):
     try:

@@ -33,6 +33,9 @@ ignr = "^2.2"
 asyncio = "^3.4.3"
 distutils-extra-python = "^2.39.2"
 setuptools = "^70.1.1"
+requests = "^2.32.3"
+celery = "^5.4.0"
+strawberry-graphql = {extras = ["fastapi"], version = "^0.235.1"}
 
 
 [tool.poetry.group.dev.dependencies]

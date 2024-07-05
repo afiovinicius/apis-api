@@ -41,12 +41,11 @@ app = FastAPI(
 )
 
 origins = [
-    "www.apis.vicit.studio",
+    "https://www.apis.vicit.studio",
     "http://apis.vicit.studio",
     "https://apis.vicit.studio",
+    "http://localhost",
     "http://localhost:3000",
-    "http://localhost:0000",
-    "http://localhost:8080",
 ]
 
 app.add_middleware(
@@ -68,11 +67,6 @@ app.include_router(router_admin.router)
 app.include_router(router_notifications.router)
 app.include_router(router_user.router)
 app.include_router(router_task.router)
-
-
-@app.get("/", tags=["Padrão"])
-async def root():
-    return {"message": "Hello World"}
 
 
 if __name__ == "__main__":

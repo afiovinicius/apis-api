@@ -13,6 +13,7 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
     role: str
+    is_provider_auth: str = "email"
 
 
 class UserUpdate(BaseModel):
@@ -24,6 +25,7 @@ class UserInDB(UserBase):
     id: uuid.UUID
     is_active: bool
     role: str
+    is_provider_auth: str
     created_at: datetime
     updated_at: datetime
 

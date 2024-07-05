@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     EMAIL_USER: str
     EMAIL_PASS: str
 
+    GOOGLE_CLIENT_ID: str
+    GOOGLE_CLIENT_SECRET_KEY: str
+    GOOGLE_REDIRECT_URI: str
+
     REDIS_URL: str
 
     class Config:
